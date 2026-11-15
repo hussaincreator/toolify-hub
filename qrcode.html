@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toolify Hub - QR Code Generator</title>
+    <!-- QR Code Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; background: #0f172a; color: #fff; text-align: center; padding: 30px; margin: 0; }
+        .card { background: #1e293b; padding: 25px; border-radius: 12px; display: inline-block; max-width: 400px; width: 100%; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        h3 { color: #38bdf8; margin-top: 0; }
+        input, select { width: 90%; padding: 10px; margin: 10px 0; background: #0f172a; border: 1px solid #334155; color: #fff; border-radius: 6px; font-size: 14px; }
+        .btn { background: #0284c7; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 6px; display: inline-block; border: none; cursor: pointer; width: 95%; font-size: 16px; font-weight: bold; margin-top: 10px; }
+        .btn:hover { background: #0369a1; }
+        #qrcode { margin: 20px auto; display: flex; justify-content: center; background: #fff; padding: 15px; border-radius: 8px; width: fit-content; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h3>⚡ QR Code Generator</h3>
+        <p style="color: #94a3b8; font-size: 13px;">Generate custom QR codes instantly for links or text.</p>
+        
+        <input type="text" id="textInput" placeholder="Enter text or URL here...">
+        <button class="btn" onclick="generateQR()">Generate QR Code</button>
+        
+        <div id="qrcode" style="display:none;"></div>
+    </div>
+
+    <script>
+        function generateQR() {
+            const text = document.getElementById('textInput').value;
+            const qrContainer = document.getElementById('qrcode');
+            qrContainer.innerHTML = "";
+            
+            if (!text.trim()) {
+                alert("Please enter some text or URL!");
+                qrContainer.style.display = "none";
+                return;
+            }
+            
+            qrContainer.style.display = "flex";
+            new QRCode(qrContainer, {
+                text: text,
+                width: 180,
+                height: 180,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        }
+    </script>
+</body>
+</html>
